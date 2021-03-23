@@ -3,7 +3,6 @@
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,21 +31,18 @@
                                     </textField>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6I-PP-Inp">
                                         <rect key="frame" x="100" y="124" width="80" height="30"/>
-                                        <color key="backgroundColor" name="AccentColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="2kg-pQ-Xom"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Sign In">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
+                                        <state key="normal" title="Log In"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="bq2-E6-zeI" kind="presentation" identifier="tasksSegue" modalPresentationStyle="fullScreen" id="SD3-qO-BZs"/>
+                                            <action selector="loginButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="7nA-85-rQH"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -59,23 +55,25 @@
                             </stackView>
                             <button contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPe-4I-zXo">
                                 <rect key="frame" x="115.5" y="471" width="89" height="30"/>
-                                <color key="backgroundColor" name="AccentColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="89" id="pPE-xZ-a2Q"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Register">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="AhR-t3-DJd" kind="presentation" modalPresentationStyle="fullScreen" id="aVZ-n9-agP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="mPe-4I-zXo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="45n-h3-OAO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NXP-vL-xVw" secondAttribute="trailing" constant="20" id="DdV-vF-vFh"/>
@@ -84,10 +82,15 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mPe-4I-zXo" secondAttribute="bottom" constant="67" id="cd8-qF-4k0"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextFiels" destination="9Yt-i5-T1a" id="6dI-Um-pIR"/>
+                        <outlet property="passwordTextFiels" destination="0nF-Xz-D4W" id="8VV-Dd-0Ea"/>
+                        <segue destination="bq2-E6-zeI" kind="presentation" identifier="tasks" modalPresentationStyle="fullScreen" id="DOM-Wt-SIW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138.40000000000001" y="79.610194902548727"/>
+            <point key="canvasLocation" x="45" y="79"/>
         </scene>
         <!--Tasks list-->
         <scene sceneID="eWh-Wl-5of">
@@ -110,10 +113,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="OmD-pn-XkY" id="WHM-dY-Qzs"/>
+                                    <outlet property="delegate" destination="OmD-pn-XkY" id="7Eq-r8-2dn"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TST-pW-WMw"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="hSp-3z-9mp" firstAttribute="leading" secondItem="TST-pW-WMw" secondAttribute="leading" id="OSS-tb-gpS"/>
                             <constraint firstItem="hSp-3z-9mp" firstAttribute="bottom" secondItem="TST-pW-WMw" secondAttribute="bottom" id="U60-Sm-A06"/>
@@ -122,12 +129,108 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tasks list" id="6Of-r5-CrP">
+                        <barButtonItem key="leftBarButtonItem" title="Log out" id="hcz-Fj-rXC">
+                            <connections>
+                                <action selector="logoutPressed:" destination="OmD-pn-XkY" id="Rmc-uT-eno"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7kT-7o-jlh"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bS6-bE-o7f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1959.375" y="79.225352112676063"/>
+            <point key="canvasLocation" x="1845" y="78"/>
+        </scene>
+        <!--Register View Controller-->
+        <scene sceneID="odu-xH-PRK">
+            <objects>
+                <viewController id="AhR-t3-DJd" customClass="RegisterViewController" customModule="ToDoFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i3V-0N-2rX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ccN-yq-GZy">
+                                <rect key="frame" x="20" y="149" width="280" height="142"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="18" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LI1-nx-bpA">
+                                        <rect key="frame" x="10" y="0.0" width="260" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" systemColor="systemGray2Color"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="AhR-t3-DJd" id="INf-gT-JAz"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" disabledBackground="key" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1sc-sd-vV6">
+                                        <rect key="frame" x="10" y="54" width="260" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" systemColor="systemGray2Color"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="pasteDelegate" destination="AhR-t3-DJd" id="ngr-sI-Eh7"/>
+                                        </connections>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hfh-aK-7yA">
+                                        <rect key="frame" x="77.5" y="108" width="125" height="34"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfI-By-Gfg">
+                                                <rect key="frame" x="0.0" y="0.0" width="48" height="34"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancelButtonPressed" destination="AhR-t3-DJd" eventType="touchUpInside" id="lNr-aa-hgr"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSl-Ov-R6W">
+                                                <rect key="frame" x="68" y="0.0" width="57" height="34"/>
+                                                <state key="normal" title="Register"/>
+                                                <connections>
+                                                    <action selector="registerButtonPressed" destination="AhR-t3-DJd" eventType="touchUpInside" id="5qv-e2-Q1B"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="1sc-sd-vV6" firstAttribute="leading" secondItem="ccN-yq-GZy" secondAttribute="leading" constant="10" id="KAe-XV-cLL"/>
+                                    <constraint firstAttribute="trailing" secondItem="1sc-sd-vV6" secondAttribute="trailing" constant="10" id="NSK-ug-qet"/>
+                                    <constraint firstItem="LI1-nx-bpA" firstAttribute="leading" secondItem="ccN-yq-GZy" secondAttribute="leading" constant="10" id="Pym-lC-Hv5"/>
+                                    <constraint firstAttribute="trailing" secondItem="LI1-nx-bpA" secondAttribute="trailing" constant="10" id="wCY-si-zMs"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3vr-C6-KPU"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3vr-C6-KPU" firstAttribute="trailing" secondItem="ccN-yq-GZy" secondAttribute="trailing" constant="20" id="VbT-bA-hjD"/>
+                            <constraint firstItem="ccN-yq-GZy" firstAttribute="leading" secondItem="i3V-0N-2rX" secondAttribute="leading" constant="20" id="iz2-Qo-drP"/>
+                            <constraint firstItem="ccN-yq-GZy" firstAttribute="top" secondItem="3vr-C6-KPU" secondAttribute="top" constant="149" id="vpQ-ks-oYn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="LI1-nx-bpA" id="eFE-Hy-PYE"/>
+                        <outlet property="passwordTextField" destination="1sc-sd-vV6" id="7kO-2K-JOE"/>
+                        <segue destination="bq2-E6-zeI" kind="presentation" identifier="tasks" modalPresentationStyle="fullScreen" id="unY-zf-orY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UzK-qG-4wb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="968" y="-810"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UaG-Tp-3sl">
@@ -146,15 +249,22 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8MS-B4-01Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1088" y="79"/>
+            <point key="canvasLocation" x="968" y="79"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="unY-zf-orY"/>
+    </inferredMetricsTieBreakers>
     <resources>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="key" catalog="system" width="86" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
