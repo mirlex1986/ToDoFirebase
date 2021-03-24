@@ -1,18 +1,18 @@
 //
-//  LoginViewControllerViewController.swift
+//  LoginViewController.swift
 //  ToDoFirebase
 //
 //  Created by Алексей on 22.03.2021.
 //
 
 import UIKit
-import Firebase
 
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTextFiels: UITextField!
     @IBOutlet weak var passwordTextFiels: UITextField!
     
+    let networkManager = NetworkManager.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,23 +27,20 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginButtonPressed() {
         guard let email = emailTextFiels.text, let password = passwordTextFiels.text else { return }
+        
         guard email != "", password != "" else {
             showAlert(header: "Error", message: "e-mail or password is missed")
             return
         }
         
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (result, error) in
-            if let error = error {
-                self?.showAlert(header: "Error", message: "\(error.localizedDescription)")
-                return
-            }
-            
+        networkManager.logIn(email: email, password: password) { [weak self] (result) in
             if result != nil {
                 self?.performSegue(withIdentifier: "tasks", sender: nil)
+            } else {
+                self?.showAlert(header: "Wrong e-mail or password", message: "Please, enter correct e-mail and password")
+                return
             }
-            
         }
-
     }
     
     

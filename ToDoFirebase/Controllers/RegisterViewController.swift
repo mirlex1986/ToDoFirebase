@@ -10,15 +10,15 @@ import TextFieldEffects
 import Firebase
 
 class RegisterViewController: UIViewController {
-
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    let networkManager = NetworkManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTextFields()
-        
     }
     
     
@@ -26,14 +26,12 @@ class RegisterViewController: UIViewController {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
         
         if email != "", password != "" {
-            Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                
+            networkManager.createUser(email: email, password: password) { [weak self] (result)  in
                 if result != nil {
                     self?.performSegue(withIdentifier: "tasks", sender: nil)
+                } else {
+                    self?.showAlert(header: "Wrong e-mail or password", message: "Please, enter correct e-mail and password")
+                    return
                 }
             }
         }
@@ -45,12 +43,23 @@ class RegisterViewController: UIViewController {
 }
 
 
-extension RegisterViewController {
+extension RegisterViewController: UITextFieldDelegate {
+    
     private func configureTextFields() {
 
     }
     
-    
-    
-    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+}
+
+//MARK: - Alert
+extension RegisterViewController {
+    private func showAlert (header: String, message: String) {
+        let alert = UIAlertController(title: header, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .destructive)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
 }
