@@ -8,6 +8,9 @@
 import UIKit
 
 class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    private let networkManager = NetworkManager.shared
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
@@ -26,6 +29,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @IBAction func logoutPressed(_ sender: UIBarButtonItem) {
+        networkManager.logOut()
         dismiss(animated: true)
     }
     

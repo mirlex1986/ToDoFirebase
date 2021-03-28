@@ -24,6 +24,14 @@ class NetworkManager {
         }
     }
     
+    func logOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     func createUser (email: String, password: String, completion: @escaping (Any?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let _ = error {
