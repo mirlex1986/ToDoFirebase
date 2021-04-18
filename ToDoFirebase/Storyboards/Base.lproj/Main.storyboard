@@ -147,7 +147,11 @@
                                 <action selector="logoutPressed:" destination="OmD-pn-XkY" id="Rmc-uT-eno"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7kT-7o-jlh"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7kT-7o-jlh">
+                            <connections>
+                                <action selector="addTaskButtonTupped:" destination="OmD-pn-XkY" id="n93-Og-Szy"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bS6-bE-o7f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
